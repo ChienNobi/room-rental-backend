@@ -21,6 +21,8 @@ class CreateUsersTable extends Migration
             $table->string('email')->unique();
             $table->string('phone', 11);
             $table->string('password');
+            $table->string('address')->nullable();
+            $table->tinyInteger('vip_level')->default(0);
             $table->enum('role', Role::ROLES)->default(Role::ROLE_USER);
             $table->boolean('is_active')->default(false);
             $table->timestamps();

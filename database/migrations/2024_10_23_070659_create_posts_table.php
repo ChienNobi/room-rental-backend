@@ -16,21 +16,31 @@ return new class extends Migration
             $table->string('title');
             $table->text('description');
             $table->json('images');
-            // room info
-            $table->string('room_type');
-            $table->string('acreage');
 
             $table->string('city');
             $table->string('district');
             $table->string('ward');
             $table->string('detail_address');
-            $table->decimal('rent_price', 15, 0);
-            $table->decimal('electricity_price', 10, 0)->nullable();
+            $table->string('lat')->nullable();
+            $table->string('lon')->nullable();
 
+            $table->string('room_type');
+            $table->string('acreage');
+            $table->decimal('rent_fee', 15, 0);
+            $table->decimal('electricity_fee', 10, 0)->nullable();
+            $table->decimal('water_fee', 10, 0)->nullable();
+            $table->decimal('internet_fee', 10, 0)->nullable();
+            $table->decimal('extra_fee', 10, 0)->nullable();
+            $table->string('furniture')->nullable()->comment('furnished, unfurnished, partially_furnished');
 
-            //
-            $table->unsignedBigInteger('user_id');
+            $table->string('contact_name');
+            $table->string('contact_email');
+            $table->string('contact_phone');
+
+            $table->unsignedBigInteger('user_id')->index();
             $table->string('status', 10)->default('draft')->comment('draft, published, unpublished');
+            $table->string('promote_status', 10)->default('normal')->comment('normal, promote');
+            $table->dateTime('promote_expired_at')->nullable();
             $table->timestamps();
         });
     }
