@@ -98,7 +98,7 @@ class AuthService
     /**
      * @throws Exception
      */
-    public function login(string $modelNamespace, $email, $password)
+    public function login(string $modelNamespace, $email, $password): array
     {
         $user = User::query()->where('email', $email)->first();
         if(!$user) throw new NotFoundHttpException(__('auth.user_not_found'));

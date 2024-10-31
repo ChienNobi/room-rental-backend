@@ -36,7 +36,7 @@ class AuthController extends Controller
     public function create(RegisterRequest $request)
     {
         $result = DB::transaction(function() use ($request) {
-            return $this->authService->register(User::class, $request->only('name', 'email', 'password', 'avt'));
+            return $this->authService->register(User::class, $request->only('name', 'email', 'password', 'avt', 'phone', 'address'));
         });
 
         return $this->respond($result);

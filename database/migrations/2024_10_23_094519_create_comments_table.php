@@ -16,7 +16,7 @@ return new class extends Migration
             $table->string('content');
             $table->unsignedBigInteger('user_id')->index();
             $table->unsignedBigInteger('post_id')->index();
-            $table->tinyInteger('rating');
+            $table->tinyInteger('rating')->nullable();
             $table->timestamps();
         });
     }

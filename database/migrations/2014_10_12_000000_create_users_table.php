@@ -12,14 +12,14 @@ class CreateUsersTable extends Migration
      *
      * @return void
      */
-    public function up()
+    public function up(): void
     {
         Schema::create('users', function (Blueprint $table) {
             $table->id();
             $table->string('name');
             $table->string('avt')->nullable();
             $table->string('email')->unique();
-            $table->string('phone', 11);
+            $table->string('phone', 11)->unique();
             $table->string('password');
             $table->string('address')->nullable();
             $table->tinyInteger('vip_level')->default(0);
