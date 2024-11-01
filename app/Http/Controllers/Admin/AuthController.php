@@ -8,32 +8,22 @@ use App\Http\Requests\Admin\Admin\LoginRequest;
 use App\Http\Requests\Admin\Admin\LogoutRequest;
 use App\Http\Requests\Admin\Admin\RefreshTokenRequest;
 use App\Http\Requests\Admin\Admin\RegisterRequest;
-use App\Models\Admin;
 use App\Models\User;
 use App\Services\AuthService;
 use Illuminate\Support\Facades\DB;
-use MarcinOrlowski\ResponseBuilder\Exceptions\ArrayWithMixedKeysException;
-use MarcinOrlowski\ResponseBuilder\Exceptions\ConfigurationNotFoundException;
-use MarcinOrlowski\ResponseBuilder\Exceptions\IncompatibleTypeException;
-use MarcinOrlowski\ResponseBuilder\Exceptions\InvalidTypeException;
-use MarcinOrlowski\ResponseBuilder\Exceptions\MissingConfigurationKeyException;
-use MarcinOrlowski\ResponseBuilder\Exceptions\NotIntegerException;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpKernel\Exception\UnauthorizedHttpException;
 
 class AuthController extends Controller
 {
-    protected $authService;
-
-    public function __construct(AuthService $authService)
+    public function __construct(protected readonly AuthService $authService)
     {
-        $this->authService = $authService;
     }
 
     /**
      * @throws \Exception
      */
-    public function create(RegisterRequest $request)
+    public function create(RegisterRequest $request): Response
     {
         $result = DB::transaction(function() use ($request) {
             return $this->authService->register(User::class, $request->only('name', 'email', 'password', 'avt', 'phone', 'address'));
@@ -49,7 +39,7 @@ class AuthController extends Controller
         return $this->respond($this->authService->login(User::class, ...array_values($data)));
     }
 
-    public function logout(LogoutRequest $request)
+    public function logout(LogoutRequest $request): Response
     {
         $user = auth()->user();
         $this->authService->revokeToken($user->token());

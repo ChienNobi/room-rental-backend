@@ -42,32 +42,22 @@ services:
         networks:
             web_net:
 
-    elasticmq:
-        image: softwaremill/elasticmq:latest
-        container_name: "${APP_NAME}_${APP_ENV}_elasticmq"
-        restart: always
-        ports:
-            - "${SQS_PORT}:9324"
-            - "${SQS_BIND_PORT}:9325"
-        networks:
-            web_net:
-
-    redis:
-        image: redis:alpine
-        container_name: "${APP_NAME}_${APP_ENV}_redis"
-        restart: always
-        environment:
-            - "REDIS_PASSWORD=${REDIS_PASSWORD}"
-        command:
-            - /bin/sh
-            - -c
-            - redis-server --requirepass "$${REDIS_PASSWORD:?REDIS_PASSWORD variable is not set}"
-        ports:
-            - "${REDIS_EXPOSE_PORT:-$REDIS_PORT}:${REDIS_PORT}"
-        volumes:
-            - ".docker/redis/data:/data"
-        networks:
-            web_net:
+#    redis:
+#        image: redis:alpine
+#        container_name: "${APP_NAME}_${APP_ENV}_redis"
+#        restart: always
+#        environment:
+#            - "REDIS_PASSWORD=${REDIS_PASSWORD}"
+#        command:
+#            - /bin/sh
+#            - -c
+#            - redis-server --requirepass "$${REDIS_PASSWORD:?REDIS_PASSWORD variable is not set}"
+#        ports:
+#            - "${REDIS_EXPOSE_PORT:-$REDIS_PORT}:${REDIS_PORT}"
+#        volumes:
+#            - ".docker/redis/data:/data"
+#        networks:
+#            web_net:
 
 
 networks:

@@ -25,7 +25,7 @@ abstract class BaseService
     const TIME_STAMP = ['created_at', 'updated_at', 'deleted_at'];
 
     /** @var $model Model */
-    protected $model;
+    protected Model $model;
 
     public function __construct()
     {
@@ -37,7 +37,7 @@ abstract class BaseService
      *
      * @return mixed
      */
-    public abstract function model();
+    public abstract function model(): Model;
 
     /**
      * Set Eloquent Model to instantiate
