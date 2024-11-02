@@ -37,7 +37,7 @@ abstract class BaseService
      *
      * @return mixed
      */
-    public abstract function model(): Model;
+    public abstract function model(): string;
 
     /**
      * Set Eloquent Model to instantiate
@@ -55,12 +55,11 @@ abstract class BaseService
     }
 
     /**
-     * @param bool $withDefaultFilter
      * @return Builder
      */
-    private function query(bool $withDefaultFilter = false): Builder
+    private function query(): Builder
     {
-        return $this->buildBasicQuery(null, [], false, $withDefaultFilter);
+        return $this->buildBasicQuery(null, [], false, false);
     }
 
     /**

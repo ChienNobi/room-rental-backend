@@ -13,8 +13,8 @@ class DatabaseSeeder extends Seeder
      */
     public function run()
     {
-        // \App\Models\User::factory(10)->create();
-        $this->call(PermissionSeeder::class);
-        $this->call(AdminSeeder::class);
+        $this->call(LocationCitySeeder::class);
+        $this->call(LocationDistrictSeeder::class);
+        $this->call(LocationWardSeeder::class);
     }
 }
