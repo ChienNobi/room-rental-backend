@@ -24,4 +24,23 @@ class Common
         'INVALID_TOKEN' => 'INVALID_TOKEN',
         'VALID' => 'VALID'
     ];
+
+    const ROOM_TYPES = [
+        'MOTEL' => 'MOTEL',
+        'APARTMENT' => 'APARTMENT',
+        'HOUSE' => 'HOUSE',
+        'OFFICE' => 'OFFICE'
+    ];
+
+    const FURNITURE_TYPES = [
+        'FULL' => 'FULL',
+        'PART' => 'PART',
+        'NONE' => 'NONE'
+    ];
+    const POST_STATUSES = [
+        'PENDING' => 'PENDING',
+        'PUBLISH' => 'PUBLISH',
+        'DRAFT' => 'DRAFT',
+        'REJECTED' => 'REJECTED'
+    ];
 }

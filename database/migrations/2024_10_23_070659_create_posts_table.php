@@ -21,8 +21,8 @@ return new class extends Migration
             $table->string('district');
             $table->string('ward');
             $table->string('detail_address');
-            $table->string('lat')->nullable();
-            $table->string('lon')->nullable();
+            $table->string('lat');
+            $table->string('lon');
 
             $table->string('room_type');
             $table->string('acreage');
@@ -31,8 +31,10 @@ return new class extends Migration
             $table->decimal('water_fee', 10, 0)->nullable();
             $table->decimal('internet_fee', 10, 0)->nullable();
             $table->decimal('extra_fee', 10, 0)->nullable();
-            $table->string('furniture')->nullable()->comment('furnished, unfurnished, partially_furnished');
+            $table->string('furniture', 10)->nullable()->comment('FULL, NONE, BASIC');
+            $table->string('furniture_detail')->nullable();
 
+            $table->integer('room_number')->default(1);
             $table->string('contact_name');
             $table->string('contact_email');
             $table->string('contact_phone');
