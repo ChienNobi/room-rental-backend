@@ -46,4 +46,8 @@ Route::middleware('auth:api_admin')->group(function () {
     Route::post('posts', [PostController::class, 'store'])->name('posts.create');
     Route::put('posts/{id}', [PostController::class, 'update'])->name('post.update');
     Route::delete('posts/{id}', [PostController::class, 'destroy']);
+
+    Route::get('users', [AuthController::class, 'index']);
+    Route::get('users/{id}', [AuthController::class, 'show']);
+    Route::put('users/{id}', [AuthController::class, 'update']);
 });

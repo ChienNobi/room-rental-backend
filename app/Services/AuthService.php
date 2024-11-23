@@ -78,6 +78,10 @@ class AuthService
     {
         $data['password'] = Hash::make($data['password']);
 
+        if(isset($data['is_active']) && $data['is_active']) {
+            return $modelNamespace::create($data);
+        }
+
         $user = $modelNamespace::create($data);
         $token = Str::random(Common::REQUEST_ACCOUNT_TOKEN_LENGTH);
         UserRequest::create([

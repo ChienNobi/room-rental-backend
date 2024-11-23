@@ -10,13 +10,15 @@ use App\Http\Requests\Admin\Admin\RefreshTokenRequest;
 use App\Http\Requests\Admin\Admin\RegisterRequest;
 use App\Models\User;
 use App\Services\AuthService;
+use App\Services\UserService;
+use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpKernel\Exception\UnauthorizedHttpException;
 
 class AuthController extends Controller
 {
-    public function __construct(protected readonly AuthService $authService)
+    public function __construct(protected readonly AuthService $authService, protected readonly UserService $userService)
     {
     }
 
@@ -26,7 +28,7 @@ class AuthController extends Controller
     public function create(RegisterRequest $request): Response
     {
         $result = DB::transaction(function() use ($request) {
-            return $this->authService->register(User::class, $request->only('name', 'email', 'password', 'avt', 'phone', 'address'));
+            return $this->authService->register(User::class, $request->only('name', 'email', 'password', 'avt', 'phone', 'address', 'is_active'));
         });
 
         return $this->respond($result);
@@ -76,6 +78,21 @@ class AuthController extends Controller
         }
 
         return $this->authService->activeUser($validateInfo['data']->user_id, $validateInfo['data']->id);
+    }
+
+    public function index()
+    {
+        return $this->respond($this->userService->paginate());
+    }
+
+    public function show($id)
+    {
+        return $this->respond($this->userService->show($id));
+    }
+
+    public function update($id, Request $request)
+    {
+        return $this->respond($this->userService->update(intval($id), $request->only('name', 'email', 'avt', 'phone', 'address', 'is_active')));
     }
 }
 

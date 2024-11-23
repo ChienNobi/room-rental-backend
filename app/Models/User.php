@@ -31,8 +31,7 @@ class User extends Authenticatable
     ];
 
     protected $hidden = [
-        'password',
-        'is_active'
+        'password'
     ];
 
     public function findForPassport($email)
