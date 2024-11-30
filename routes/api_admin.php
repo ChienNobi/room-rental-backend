@@ -5,11 +5,6 @@ use App\Http\Controllers\Admin\LocationCityController;
 use App\Http\Controllers\Admin\LocationDistrictController;
 use App\Http\Controllers\Admin\LocationWardController;
 use App\Http\Controllers\Admin\PostController;
-use App\Http\Controllers\CategoryController;
-use App\Http\Controllers\ReportController;
-use App\Http\Controllers\TaskController;
-use App\Http\Controllers\TransactionController;
-use App\Http\Controllers\WalletController;
 use Illuminate\Support\Facades\Route;
 
 /*

@@ -247,8 +247,9 @@ abstract class BaseService
      */
     public function update(Model|int $parent, array $attributes): Model|bool|int
     {
+        $query = $this->model->query();
         if (is_integer($parent)) {
-            $parent = $this->query()->findOrFail($parent);
+            $parent = $query->findOrFail($parent);
         }
         $parent->fill($attributes);
         $relations = [];

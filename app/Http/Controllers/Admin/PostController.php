@@ -39,9 +39,17 @@ class PostController extends Controller
         return $this->respond($result);
     }
 
-    public function update($id, CreatePostRequest $request): Response
+    /**
+     * @throws InvalidTypeException
+     * @throws NotIntegerException
+     * @throws ArrayWithMixedKeysException
+     * @throws MissingConfigurationKeyException
+     * @throws IncompatibleTypeException
+     * @throws ConfigurationNotFoundException
+     */
+    public function update($id, CreatePostRequest $request)
     {
-        $result = $this->postService->update($id, $request->only(
+        $result = $this->postService->update(intval($id), $request->only(
             'title', 'description', 'images', 'status',
             'city', 'district', 'ward', 'detail_address', 'lat', 'lon',
             'room_type', 'acreage', 'rent_fee', 'electricity_fee', 'water_fee', 'internet_fee', 'extra_fee',
