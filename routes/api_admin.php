@@ -28,16 +28,17 @@ Route::post('refresh_token', [AuthController::class, 'refreshToken'])->name('adm
 Route::get('active-user/{token}', [AuthController::class, 'activeAccount']);
 
 
-Route::middleware('auth:api_admin')->group(function () {
-    Route::get('cities', [LocationCityController::class, 'index']);
-    Route::get('districts', [LocationDistrictController::class, 'index']);
-    Route::get('wards', [LocationWardController::class, 'index']);
+Route::get('cities', [LocationCityController::class, 'index']);
+Route::get('districts', [LocationDistrictController::class, 'index']);
+Route::get('wards', [LocationWardController::class, 'index']);
 
+Route::get('posts/{id}', [PostController::class, 'show']);
+Route::get('posts', [PostController::class, 'index'])->name('posts.get');
+
+Route::middleware('auth:api_admin')->group(function () {
     Route::post('logout', [AuthController::class, 'logout'])->name('admin.logout');
     Route::get('profile', [AuthController::class, 'profile'])->name('admin.profile');
 
-    Route::get('posts/{id}', [PostController::class, 'show']);
-    Route::get('posts', [PostController::class, 'index'])->name('posts.get');
     Route::post('posts', [PostController::class, 'store'])->name('posts.create');
     Route::put('posts/{id}', [PostController::class, 'update'])->name('post.update');
     Route::delete('posts/{id}', [PostController::class, 'destroy']);
