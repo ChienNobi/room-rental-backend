@@ -87,4 +87,23 @@ class PostController extends Controller
         $result = $this->postService->show(intval($id));
         return $this->respond($result);
     }
+
+    public function getFavoritePost()
+    {
+        Log::info('ChienTT getFavoritePost');
+        $result = $this->postService->getFavoritePost(auth()->id());
+        return $this->respond($result);
+    }
+
+    public function saveFavorite($postId)
+    {
+        $this->postService->saveFavoritePost($postId, auth()->id());
+        return $this->respond(true);
+    }
+
+    public function deleteFavorite($postId)
+    {
+        $this->postService->deleteFavorite($postId);
+        return $this->respond(true);
+    }
 }

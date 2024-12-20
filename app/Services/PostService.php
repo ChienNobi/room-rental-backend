@@ -3,6 +3,7 @@ namespace App\Services;
 
 
 use App\Models\Post;
+use App\Models\PostFavorite;
 
 class PostService extends BaseService
 {
@@ -29,5 +30,26 @@ class PostService extends BaseService
         })->when(isset($params['price']), function ($query) use ($params) {
             $query->whereBetween('rent_fee', $params['price']);
         });
+    }
+
+    public function getFavoritePost($userId): \Illuminate\Database\Eloquent\Collection|array
+    {
+        return PostFavorite::query()->join('posts', 'post_favorites.post_id', '=', 'posts.id')
+            ->where('post_favorites.user_id', $userId)
+            ->select('posts.*')
+            ->get();
+    }
+
+    public function saveFavoritePost($id, $userId): void
+    {
+        PostFavorite::query()->create([
+            'user_id' => $userId,
+            'post_id' => $id
+        ]);
+    }
+
+    public function deleteFavorite($postId)
+    {
+        return PostFavorite::query()->where('post_id', $postId)->delete();
     }
 }

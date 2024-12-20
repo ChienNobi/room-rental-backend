@@ -32,9 +32,6 @@ Route::get('cities', [LocationCityController::class, 'index']);
 Route::get('districts', [LocationDistrictController::class, 'index']);
 Route::get('wards', [LocationWardController::class, 'index']);
 
-Route::get('posts/{id}', [PostController::class, 'show']);
-Route::get('posts', [PostController::class, 'index'])->name('posts.get');
-
 Route::middleware('auth:api_admin')->group(function () {
     Route::post('logout', [AuthController::class, 'logout'])->name('admin.logout');
     Route::get('profile', [AuthController::class, 'profile'])->name('admin.profile');
@@ -46,4 +43,11 @@ Route::middleware('auth:api_admin')->group(function () {
     Route::get('users', [AuthController::class, 'index']);
     Route::get('users/{id}', [AuthController::class, 'show']);
     Route::put('users/{id}', [AuthController::class, 'update']);
+
+    Route::get('posts/save-favorite/{id}', [PostController::class, 'saveFavorite']);
+    Route::get('posts/favorites/all', [PostController::class, 'getFavoritePost']);
+    Route::delete('posts/delete-favorite/{id}', [PostController::class, 'deleteFavorite']);
 });
+
+Route::get('posts/{id}', [PostController::class, 'show']);
+Route::get('posts', [PostController::class, 'index'])->name('posts.get');
