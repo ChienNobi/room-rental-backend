@@ -76,6 +76,10 @@ class AuthService
      */
     public function register(string $modelNamespace, $data)
     {
+        $ignoreSendMail = config('mail.ignore_send_mail');
+        if(!array_key_exists('is_active', $data) && $ignoreSendMail) {
+            $data['is_active'] = $ignoreSendMail;
+        }
         $data['password'] = Hash::make($data['password']);
 
         if(isset($data['is_active']) && $data['is_active']) {

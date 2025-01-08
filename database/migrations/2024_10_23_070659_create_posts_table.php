@@ -43,6 +43,8 @@ return new class extends Migration
             $table->string('status', 10)->default('draft')->comment('draft, published, unpublished');
             $table->string('promote_status', 10)->default('normal')->comment('normal, promote');
             $table->dateTime('promote_expired_at')->nullable();
+
+            $table->boolean('is_authentic')->comment('true: authentic, false: not authentic')->default(false);
             $table->timestamps();
         });
     }

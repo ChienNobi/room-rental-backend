@@ -107,4 +107,5 @@ return [
         ],
     ],
 
+    'ignore_send_mail' => env('IGNORE_SEND_MAIL', false),
 ];
