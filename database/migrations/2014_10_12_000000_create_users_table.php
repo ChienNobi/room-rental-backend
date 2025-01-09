@@ -25,6 +25,8 @@ class CreateUsersTable extends Migration
             $table->tinyInteger('vip_level')->default(0);
             $table->enum('role', Role::ROLES)->default(Role::ROLE_USER);
             $table->boolean('is_active')->default(false);
+            $table->double('balance')->default(0);
+            $table->timestamp('promotion_balance')->default(0);
             $table->timestamps();
             $table->softDeletes();
         });

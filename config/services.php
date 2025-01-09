@@ -30,4 +30,12 @@ return [
         'region' => env('AWS_DEFAULT_REGION', 'us-east-1'),
     ],
 
+    'vn_pay' => [
+        'url' => env('VN_PAY_URL'),
+        'tmn_code' => env('VN_PAY_TMN_CODE'),
+        'hash_secret' => env('VN_PAY_HASH_SECRET'),
+        'return_url' => env('VN_PAY_RETURN_URL'),
+        'notify_url' => env('VN_PAY_NOTIFY_URL'),
+        'version' => env('VN_PAY_VERSION'),
+    ],
 ];

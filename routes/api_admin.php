@@ -5,6 +5,7 @@ use App\Http\Controllers\Admin\LocationCityController;
 use App\Http\Controllers\Admin\LocationDistrictController;
 use App\Http\Controllers\Admin\LocationWardController;
 use App\Http\Controllers\Admin\PostController;
+use App\Http\Controllers\Admin\VnPayController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -47,6 +48,8 @@ Route::middleware('auth:api_admin')->group(function () {
     Route::get('posts/save-favorite/{id}', [PostController::class, 'saveFavorite']);
     Route::get('posts/favorites/all', [PostController::class, 'getFavoritePost']);
     Route::delete('posts/delete-favorite/{id}', [PostController::class, 'deleteFavorite']);
+
+    Route::get('payments/payment-url', [VnPayController::class, 'buildPaymentUrl']);
 });
 
 Route::get('posts/{id}', [PostController::class, 'show']);
