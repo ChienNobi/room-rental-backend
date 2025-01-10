@@ -35,7 +35,7 @@ class VnPayController extends Controller
      */
     public function buildPaymentUrl(Request $r): Response
     {
-        $url = $this->vnPayService->buildRedirectUrl($r->input('amount'));
+        $url = $this->vnPayService->createPayment($r->input('amount'));
 
         return $this->respond($url);
     }

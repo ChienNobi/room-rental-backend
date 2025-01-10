@@ -17,9 +17,11 @@ return new class extends Migration
             $table->string('type')->comment('deposit, charge, refund');
             $table->double('amount');
             $table->string('description')->nullable();
+            $table->string('bank_code')->nullable();
             $table->string('status')->comment('pending, success, failed');
             $table->string('gateway')->comment('system, vn-pay, momo, zalo-pay, banking');
             $table->string('reference_id')->nullable()->comment('reference_id from gateway, null when system');
+            $table->string('payment_result_description')->nullable();
             $table->timestamps();
         });
     }
