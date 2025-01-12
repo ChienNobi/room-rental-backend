@@ -24,6 +24,8 @@ class VnPayService
             'description' => $description,
             'status' => Payment::PAYMENT_STATUS['PENDING'],
             'gateway' => Payment::PAYMENT_GATEWAY['VN_PAY'],
+            'created_at' => now(),
+            'updated_at' => now(),
         ]);
 
         return $this->buildRedirectUrl($amount, $orderId, $description, $locale);
@@ -46,7 +48,7 @@ class VnPayService
             'vnp_OrderInfo' => $description,
             'vnp_OrderType' => Payment::ORDER_TYPE['OTHER'],
             'vnp_Amount' => $amount * 100,
-            'vnp_ReturnUrl' => config('services.vn_pay.return_url'),
+            'vnp_ReturnUrl' => route('vnpay.callback'),
             'vnp_IpAddr' => request()->ip(),
             'vnp_CreateDate' => date('YmdHis'),
         ];

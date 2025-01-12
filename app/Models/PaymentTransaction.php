@@ -25,5 +25,6 @@ class PaymentTransaction extends Authenticatable
         'status',
         'gateway',
         'reference_id',
+        'bank_code',
     ];
 }

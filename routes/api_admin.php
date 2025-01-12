@@ -54,3 +54,4 @@ Route::middleware('auth:api_admin')->group(function () {
 
 Route::get('posts/{id}', [PostController::class, 'show']);
 Route::get('posts', [PostController::class, 'index'])->name('posts.get');
+Route::get('payments/payment-callback', [VnPayController::class, 'verifyVnPayCallback'])->name('vnpay.callback');

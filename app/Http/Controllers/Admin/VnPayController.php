@@ -39,4 +39,22 @@ class VnPayController extends Controller
 
         return $this->respond($url);
     }
+
+    /**
+     * @throws InvalidTypeException
+     * @throws NotIntegerException
+     * @throws ArrayWithMixedKeysException
+     * @throws MissingConfigurationKeyException
+     * @throws ConfigurationNotFoundException
+     * @throws IncompatibleTypeException
+     */
+    public function verifyVnPayCallback(Request $r)
+    {
+        $result = $this->vnPayService->vnPayCallback($r);
+        if(!array_key_exists('Error', $result)) {
+            return redirect()->away(config('services.vn_pay.return_url'));
+        }
+
+        return redirect()->away(config('services.vn_pay.return_url'));
+    }
 }
